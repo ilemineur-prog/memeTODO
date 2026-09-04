@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mémé TODO — Méthodologie juridique</title>
+<meta name="description" content="Mémé TODO rassemble les outils de méthodologie juridique conçus pour les étudiants : référencement de la législation, de la jurisprudence et de la doctrine.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Public+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+
+<header class="barre">
+  <a class="barre__logo" href="#accueil">Mémé TODO</a>
+  <button
+    type="button"
+    class="barre__bouton-menu"
+    id="bouton-menu"
+    aria-expanded="false"
+    aria-controls="menu-panel"
+    aria-label="Ouvrir le menu des assistants">
+    <span class="barre__icone-menu" aria-hidden="true"><span></span><span></span><span></span></span>
+  </button>
+</header>
+
+<nav class="menu-panel" id="menu-panel" hidden aria-label="Navigation entre les assistants">
+  <a href="#accueil" data-route="accueil">Accueil</a>
+  <a href="#legislation" data-route="legislation">Législation</a>
+  <a href="#jurisprudence" data-route="jurisprudence">Jurisprudence</a>
+  <a href="#doctrine" data-route="doctrine">Doctrine</a>
+</nav>
+
+<main id="contenu">
+
+  <div id="vue-accueil">
+
+    <section class="hero" id="accueil">
+      <div class="hero__image" role="img" aria-label="Mémé TODO, personnage à lunettes, derrière une pile de livres."></div>
+
+      <div class="hero__texte">
+        <h1 class="hero__titre">Mémé TODO</h1>
+        <p class="hero__accroche">Votre assistante personnelle <br> de référencement juridique</p>
+      </div>
+    </section>
+
+    <section class="outils" id="outils">
+      <div class="outils__entete">
+        <h2>Choisissez la source à référencer</h2>
+      </div>
+
+      <div class="cartes">
+
+        <a class="carte carte--legislation" href="#legislation">
+          <span class="carte__tranche" aria-hidden="true"></span>
+          <span class="carte__corps">
+            <span class="carte__titre">Législation</span>
+            <span class="carte__description">Normes et travaux préparatoires.</span>
+            <span class="badge">Disponible</span>
+          </span>
+        </a>
+
+        <a class="carte carte--jurisprudence" href="#jurisprudence">
+          <span class="carte__tranche" aria-hidden="true"></span>
+          <span class="carte__corps">
+            <span class="carte__titre">Jurisprudence</span>
+            <span class="carte__description">Décisions des juridictions constitutionnelle, administratives et judiciaires.</span>
+            <span class="badge">Disponible</span>
+          </span>
+        </a>
+
+        <a class="carte carte--doctrine" href="#doctrine">
+          <span class="carte__tranche" aria-hidden="true"></span>
+          <span class="carte__corps">
+            <span class="carte__titre">Doctrine</span>
+            <span class="carte__description">Revues, ouvrages, encyclopédies et autres.</span>
+            <span class="badge">Disponible</span>
+          </span>
+        </a>
+
+      </div>
+    </section>
+
+  </div>
+
+  <div id="vue-app" class="vue-app" hidden>
+    <iframe id="cadre-app" class="cadre-app" src="about:blank" title="Assistant de référencement"></iframe>
+  </div>
+
+</main>
+
+<footer class="pied" id="pied">
+  <p>Mémé TODO — Outils de Méthodologie juridique</p>
+</footer>
+
+<noscript>
+  <p style="padding:1rem;background:#f6efe1;">
+    Ce site affiche les assistants dans la page grâce à JavaScript. Sans JavaScript, utilisez les liens directs :
+    <a href="https://ilemineur-prog.github.io/assistant-legislation/">Législation</a>,
+    <a href="https://ilemineur-prog.github.io/assistant-jurisprudence/">Jurisprudence</a>,
+    <a href="https://ilemineur-prog.github.io/assistant-doctrine/assistant-doctrine.html">Doctrine</a>.
+  </p>
+</noscript>
+
+<script src="assets/js/app.js"></script>
+
+</body>
+</html>
