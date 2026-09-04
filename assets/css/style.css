@@ -1,0 +1,421 @@
+/* ===========================================================
+   Mémé TODO — Méthodologie juridique
+   Palette et typographie inspirées de la bannière "Mémé TODO"
+   (bruns café, or vieilli) et de la bibliothèque juridique
+   (bois ambré, reliures de cuir).
+   =========================================================== */
+
+:root {
+  /* Couleurs — échantillonnées sur les deux photos fournies */
+  --ink: #241811;         /* brun-noir profond — fonds sombres, texte */
+  --ink-soft: #34241a;    /* brun plus clair — dégradés, voiles */
+  --parchment: #f6efe1;   /* crème parchemin — fond des cartes */
+  --parchment-2: #efe2c9; /* crème plus soutenu — alternance */
+  --oak: #7c5232;         /* bois ambré — accent 1 */
+  --brass: #c69a4e;       /* laiton vieilli — accent principal, CTA */
+  --brass-deep: #a97c34;  /* laiton foncé — texte sur fond clair, hover */
+  --leather: #5c3226;     /* cuir foncé — accent 3 */
+  --stone: #6f6255;       /* taupe chaud — texte secondaire */
+
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-body: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --max-width: 1120px;
+  --radius: 4px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--parchment);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  background: var(--brass);
+  color: var(--ink);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  transition: top 0.15s ease;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brass-deep);
+  outline-offset: 3px;
+}
+
+/* ---------- Barre persistante + menu ---------- */
+
+:root {
+  --barre-hauteur: 3.75rem;
+}
+
+.barre {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: var(--barre-hauteur);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  background: var(--ink);
+  color: var(--parchment);
+}
+
+.barre__logo {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  color: var(--parchment);
+}
+
+.barre__bouton-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  padding: 0;
+  background: transparent;
+  border: 1px solid rgba(246, 239, 225, 0.35);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.barre__bouton-menu:hover {
+  border-color: var(--brass);
+}
+
+.barre__icone-menu {
+  position: relative;
+  width: 20px;
+  height: 14px;
+}
+
+.barre__icone-menu span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--parchment);
+  border-radius: 2px;
+  transition: transform 0.18s ease, opacity 0.18s ease, top 0.18s ease;
+}
+
+.barre__icone-menu span:nth-child(1) { top: 0; }
+.barre__icone-menu span:nth-child(2) { top: 6px; }
+.barre__icone-menu span:nth-child(3) { top: 12px; }
+
+.barre__bouton-menu.ouvert .barre__icone-menu span:nth-child(1) {
+  top: 6px;
+  transform: rotate(45deg);
+}
+.barre__bouton-menu.ouvert .barre__icone-menu span:nth-child(2) {
+  opacity: 0;
+}
+.barre__bouton-menu.ouvert .barre__icone-menu span:nth-child(3) {
+  top: 6px;
+  transform: rotate(-45deg);
+}
+
+.menu-panel {
+  position: fixed;
+  top: var(--barre-hauteur);
+  right: 1.5rem;
+  z-index: 20;
+  min-width: 220px;
+  background: var(--ink);
+  border: 1px solid rgba(246, 239, 225, 0.15);
+  border-radius: var(--radius);
+  padding: 0.5rem;
+  box-shadow: 0 12px 28px rgba(18, 12, 8, 0.35);
+}
+
+.menu-panel a {
+  display: block;
+  padding: 0.7rem 0.8rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--parchment-2);
+  font-size: 0.98rem;
+}
+
+.menu-panel a:hover,
+.menu-panel a:focus-visible {
+  background: rgba(198, 154, 78, 0.15);
+  color: var(--parchment);
+}
+
+.menu-panel a.actif {
+  color: var(--brass);
+  font-weight: 600;
+}
+
+/* ---------- Vue application (cadre) ---------- */
+
+.vue-app {
+  background: var(--ink);
+}
+
+.cadre-app {
+  display: block;
+  width: 100%;
+  height: calc(100vh - var(--barre-hauteur));
+  border: 0;
+}
+
+/* ---------- Hero ---------- */
+
+/* ---------- Bannière ----------
+   Bureau et tablette : le texte est superposé à gauche de la photo,
+   la zone sombre et floue de l'image servant de fond.
+   Mobile : la photo devient un bandeau recadré sur le personnage,
+   et le texte passe dessous — il garde ainsi une taille lisible
+   au lieu de rétrécir avec l'image. */
+
+.hero {
+  position: relative;
+  background: var(--ink);
+}
+
+.hero__image {
+  background-image: url("../img/banniere.jpg");
+  background-size: cover;
+  background-position: center right;
+  aspect-ratio: 1800 / 975;
+  min-height: 320px;
+}
+
+.hero__texte {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(52%, 640px);
+  padding: 0 clamp(1.5rem, 4vw, 4rem);
+}
+
+.hero__titre {
+  margin: 0 0 clamp(0.8rem, 2vw, 1.4rem);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(2rem, 5.2vw, 4.6rem);
+  line-height: 1.05;
+  letter-spacing: 0.1em;
+  color: #fff;
+}
+
+.hero__accroche {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(1rem, 2.1vw, 1.9rem);
+  line-height: 1.3;
+  color: #fff;
+}
+
+@media (max-width: 720px) {
+  .hero__image {
+    background-image: url("../img/banniere-mobile.jpg");
+    background-position: center;
+    aspect-ratio: 3 / 2;
+    min-height: 0;
+  }
+
+  .hero__texte {
+    position: static;
+    transform: none;
+    width: auto;
+    padding: 1.8rem 1.5rem 2.2rem;
+    text-align: center;
+  }
+
+  .hero__titre {
+    font-size: 2.1rem;
+  }
+
+  .hero__accroche {
+    font-size: 1.05rem;
+  }
+
+  .hero__accroche br {
+    display: none;
+  }
+}
+
+/* ---------- Section outils (fond bibliothèque) ---------- */
+
+.outils {
+  position: relative;
+  padding: 4.5rem 1.5rem 5rem;
+  background-image:
+    linear-gradient(180deg, rgba(36, 24, 17, 0.88), rgba(36, 24, 17, 0.82)),
+    url("../img/bibliotheque.jpg");
+  background-size: cover;
+  background-position: center 35%;
+  color: var(--parchment);
+}
+
+.outils__entete {
+  max-width: 640px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.outils__entete h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 1.2rem + 2.4vw, 2.5rem);
+  margin: 0 0 0.9rem;
+  color: var(--parchment);
+}
+
+.outils__entete p {
+  margin: 0;
+  color: var(--parchment-2);
+  font-size: 1.05rem;
+}
+
+.cartes {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 860px) {
+  .cartes {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+  }
+}
+
+.carte {
+  display: flex;
+  background: var(--parchment);
+  border-radius: var(--radius);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--ink);
+  border: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+
+.carte:hover,
+.carte:focus-visible {
+  border-color: var(--brass);
+}
+
+.carte__tranche {
+  flex: 0 0 10px;
+  background: var(--oak);
+}
+
+.carte--jurisprudence .carte__tranche {
+  background: var(--brass-deep);
+}
+
+.carte--doctrine .carte__tranche {
+  background: var(--leather);
+}
+
+.carte__corps {
+  padding: 1.6rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  flex: 1;
+}
+
+.carte__titre {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.carte__description {
+  margin: 0;
+  color: var(--stone);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.badge {
+  align-self: flex-start;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(198, 154, 78, 0.18);
+  color: var(--brass-deep);
+  border: 1px solid rgba(198, 154, 78, 0.5);
+}
+
+/* ---------- Pied de page ---------- */
+
+.pied {
+  padding: 2rem 1.5rem;
+  text-align: center;
+  background: var(--ink);
+  color: var(--parchment-2);
+  font-size: 0.9rem;
+}
+
+.pied p {
+  margin: 0;
+}
